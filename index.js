@@ -27,10 +27,10 @@ const searchButton = document.getElementById('search-button');
 const searchInput = document.getElementById('search-input');
 
 searchInput.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-      performSearch();
-    }
-  });
+  if (event.key === 'Enter') {
+    performSearch();
+  }
+});
 
 searchButton.addEventListener('click', performSearch);
 
