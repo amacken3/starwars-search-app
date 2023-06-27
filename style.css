@@ -21,6 +21,8 @@
 
 .content {
   display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the films vertically */
 }
 
 .films {
