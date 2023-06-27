@@ -1,30 +1,29 @@
 let allFilms = [];
 let allCharacters = [];
 
-// Fetch all films from SWAPI
+const searchButton = document.getElementById('search-button');
+const searchInput = document.getElementById('search-input');
+const filmListElement = document.getElementById('film-list');
+const characterListElement = document.getElementById('character-list');
+const resultsContainer = document.getElementById('results');
+
 fetch('https://swapi.dev/api/films/')
   .then(response => response.json())
   .then(data => {
     allFilms = data.results;
-    displayFilms(allFilms);
   })
   .catch(error => {
     console.error(error);
   });
 
-// Fetch all characters from SWAPI
 fetch('https://swapi.dev/api/people/')
   .then(response => response.json())
   .then(data => {
     allCharacters = data.results;
-    displayCharacters(allCharacters);
   })
   .catch(error => {
     console.error(error);
   });
-
-const searchButton = document.getElementById('search-button');
-const searchInput = document.getElementById('search-input');
 
 searchInput.addEventListener('keydown', function(event) {
   if (event.key === 'Enter') {
@@ -48,10 +47,11 @@ function performSearch() {
   });
 
   displayCharacters(filteredCharacters);
+
+  displayResults();
 }
 
 function displayFilms(films) {
-  const filmListElement = document.getElementById('film-list');
   filmListElement.innerHTML = '';
 
   films.forEach(film => {
@@ -62,7 +62,6 @@ function displayFilms(films) {
 }
 
 function displayCharacters(characters) {
-  const characterListElement = document.getElementById('character-list');
   characterListElement.innerHTML = '';
 
   characters.forEach(character => {
@@ -71,3 +70,12 @@ function displayCharacters(characters) {
     characterListElement.appendChild(characterItem);
   });
 }
+
+function displayResults() {
+  if (filmListElement.children.length > 0 || characterListElement.children.length > 0) {
+    resultsContainer.style.display = 'block';
+  } else {
+    resultsContainer.style.display = 'none';
+  }
+}
+
