@@ -23,9 +23,8 @@
   display: flex;
 }
 
-.films,
-.characters {
-  flex: 1;
+.films {
+  align-items: center;
 }
 
 h3 {
